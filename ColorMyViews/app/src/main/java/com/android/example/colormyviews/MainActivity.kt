@@ -29,7 +29,15 @@ import kotlinx.android.synthetic.main.activity_main.*
  * the Layout Editor.
  */
 class MainActivity : AppCompatActivity() {
-
+    private lateinit var boxOneText: TextView
+    private lateinit var boxTwoText: TextView
+    private lateinit var boxThreeText: TextView
+    private lateinit var boxFourText: TextView
+    private lateinit var boxFiveText: TextView
+    private lateinit var redButton: Button
+    private lateinit var greenButton: Button
+    private lateinit var yellowButton: Button
+    private lateinit var rootConstraintLayout: View
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -41,29 +49,24 @@ class MainActivity : AppCompatActivity() {
      * Attaches listeners to all the views.
      */
     private fun setListeners() {
+        boxOneText = findViewById(R.id.box_one_text)
+        boxTwoText = findViewById(R.id.box_two_text)
+        boxThreeText = findViewById(R.id.box_three_text)
+        boxFourText = findViewById(R.id.box_four_text)
+        boxFiveText = findViewById(R.id.box_five_text)
+        redButton = findViewById(R.id.red_button)
+        greenButton = findViewById(R.id.green_button)
+        yellowButton = findViewById(R.id.yellow_button)
 
-        val boxOneText = findViewById<TextView>(R.id.box_one_text)
-        val boxTwoText = findViewById<TextView>(R.id.box_two_text)
-        val boxThreeText = findViewById<TextView>(R.id.box_three_text)
-        val boxFourText = findViewById<TextView>(R.id.box_four_text)
-        val boxFiveText = findViewById<TextView>(R.id.box_five_text)
-
-        val rootConstraintLayout = findViewById<View>(R.id.constraint_layout)
-
-        val redButton = findViewById<Button>(R.id.red_button)
-        val greenButton = findViewById<Button>(R.id.green_button)
-        val yellowButton = findViewById<Button>(R.id.yellow_button)
+        rootConstraintLayout = findViewById(R.id.constraint_layout)
 
         val clickableViews: List<View> =
             listOf(
                 boxOneText, boxTwoText, boxThreeText,
-                boxFourText, boxFiveText, rootConstraintLayout,
-                redButton, greenButton, yellowButton
+                boxFourText, boxFiveText, rootConstraintLayout, redButton, greenButton, yellowButton
             )
-
-        for (item in clickableViews) {
+        for (item in clickableViews)
             item.setOnClickListener { makeColored(it) }
-        }
     }
 
     /**
@@ -74,20 +77,17 @@ class MainActivity : AppCompatActivity() {
 
     private fun makeColored(view: View) {
         when (view.id) {
-
             // Boxes using Color class colors for background
             R.id.box_one_text -> view.setBackgroundColor(Color.DKGRAY)
             R.id.box_two_text -> view.setBackgroundColor(Color.GRAY)
-
             R.id.box_three_text -> view.setBackgroundColor(Color.BLUE)
             R.id.box_four_text -> view.setBackgroundColor(Color.MAGENTA)
             R.id.box_five_text -> view.setBackgroundColor(Color.BLUE)
-
+            
             // Boxes using custom colors for background
-            R.id.red_button -> box_three_text.setBackgroundResource(R.color.my_red)
-            R.id.yellow_button -> box_four_text.setBackgroundResource(R.color.my_yellow)
-            R.id.green_button -> box_five_text.setBackgroundResource(R.color.my_green)
-
+            R.id.red_button -> boxThreeText.setBackgroundResource(R.color.my_red)
+            R.id.yellow_button -> boxFourText.setBackgroundResource(R.color.my_yellow)
+            R.id.green_button -> boxFiveText.setBackgroundResource(R.color.my_green)
             else -> view.setBackgroundColor(Color.LTGRAY)
         }
     }
